@@ -1,30 +1,28 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "ht3aa/status-tabs",
+    "description": "Add tabs according to the casts class of the status column (or column specifiy by you)",
     "keywords": [
-        ":vendor_name",
+        "ht3aa",
         "laravel",
         "filamentphp",
-        ":package_slug"
+        "status-tabs"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/ht3aa/status-tabs",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/ht3aa/status-tabs/issues",
+        "source": "https://github.com/ht3aa/status-tabs"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Hasan Tahseen",
+            "email": "ht3aa2001@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
         "filament/filament": "^3.0",
-        "filament/forms": "^3.0",
-        "filament/tables": "^3.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -42,13 +40,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Ht3aa\\StatusTabs\\": "src/",
+            "Ht3aa\\StatusTabs\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Ht3aa\\StatusTabs\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -68,10 +66,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Ht3aa\\StatusTabs\\StatusTabsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "StatusTabs": "Ht3aa\\StatusTabs\\Facades\\StatusTabs"
             }
         }
     },

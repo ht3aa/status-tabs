@@ -1,62 +1,114 @@
-# :package_description
+# Add tabs according to the casts class of the status column (or column specifiy by you)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ht3aa/status-tabs.svg?style=flat-square)](https://packagist.org/packages/ht3aa/status-tabs)
+[![Total Downloads](https://img.shields.io/packagist/dt/ht3aa/status-tabs.svg?style=flat-square)](https://packagist.org/packages/ht3aa/status-tabs)
 
-<!--delete-->
----
-This repo can be used to scaffold a Filament plugin. Follow these steps to get started:
-
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Make something great!
----
-<!--/delete-->
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+![Status Tabs Example](image.png)
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require ht3aa/status-tabs
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
 
 ## Usage
 
+This package provides a `StatusTabs` class that automatically generates tabs in your Filament resource list page based on the status enum of your model.
+
+### Requirements
+
+1. Your model must have a `status` column cast to an enum class
+2. Your enum class must implement `getLabel()` and `getIcon()` methods
+
+### Example Enum
+
 ```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+<?php
+
+namespace App\Enums;
+
+enum OrderStatus: string
+{
+    case PENDING = 'pending';
+    case PROCESSING = 'processing';
+    case COMPLETED = 'completed';
+    case CANCELLED = 'cancelled';
+
+    public function getLabel(): string
+    {
+        return match($this) {
+            self::PENDING => 'Pending',
+            self::PROCESSING => 'Processing',
+            self::COMPLETED => 'Completed',
+            self::CANCELLED => 'Cancelled',
+        };
+    }
+
+    public function getIcon(): string
+    {
+        return match($this) {
+            self::PENDING => 'heroicon-o-clock',
+            self::PROCESSING => 'heroicon-o-arrow-path',
+            self::COMPLETED => 'heroicon-o-check-circle',
+            self::CANCELLED => 'heroicon-o-x-circle',
+        };
+    }
+}
 ```
+
+### Example Model
+
+```php
+<?php
+
+namespace App\Models;
+
+use App\Enums\OrderStatus;
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    protected $casts = [
+        'status' => OrderStatus::class,
+    ];
+}
+```
+
+### Using in Filament Resource
+
+In your Filament resource's list page, extend `StatusTabs` instead of `ListRecords`:
+
+```php
+<?php
+
+namespace App\Filament\Resources\OrderResource\Pages;
+
+use App\Filament\Resources\OrderResource;
+use Ht3aa\StatusTabs\StatusTabs;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+
+class ListOrders extends StatusTabs
+{
+    protected static string $resource = OrderResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+        ];
+    }
+}
+```
+
+The `StatusTabs` class will automatically:
+- Create an "All" tab showing all records
+- Create a tab for each status enum case
+- Display the status label, icon, and count badge for each tab
+- Filter records by status when a tab is selected
 
 ## Testing
 
@@ -78,7 +130,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Hasan Tahseen](https://github.com/ht3aa)
 - [All Contributors](../../contributors)
 
 ## License

@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Ht3aa\StatusTabs;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class StatusTabsPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'status-tabs';
     }
 
     public function register(Panel $panel): void

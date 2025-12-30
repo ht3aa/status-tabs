@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Ht3aa\StatusTabs\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class StatusTabsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'status-tabs';
 
     public $description = 'My command';
 
