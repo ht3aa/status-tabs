@@ -14,7 +14,11 @@ class StatusTabs extends ListRecords
             'all' => Tab::make('الكل'),
         ];
         // get status column from the model
-        $statusEnumClass = $this->getModel()::select('status')->first()->getCasts('status')['status'];
+        $statusEnumClass = $this->getModel()::select('status')->first()?->getCasts('status')['status'];
+
+        if (! $statusEnumClass) {
+            return [];
+        }
 
         foreach ($statusEnumClass::cases() as $status) {
             $tabs[$status->value] = Tab::make($status->getLabel())
