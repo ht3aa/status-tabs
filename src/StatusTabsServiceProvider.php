@@ -101,8 +101,8 @@ class StatusTabsServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('status-tabs', __DIR__ . '/../resources/dist/components/status-tabs.js'),
-            Css::make('status-tabs-styles', __DIR__ . '/../resources/dist/status-tabs.css'),
-            Js::make('status-tabs-scripts', __DIR__ . '/../resources/dist/status-tabs.js'),
+            // Css::make('status-tabs-styles', __DIR__ . '/../resources/dist/status-tabs.css'),
+            // Js::make('status-tabs-scripts', __DIR__ . '/../resources/dist/status-tabs.js'),
         ];
     }
 
