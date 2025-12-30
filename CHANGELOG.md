@@ -2,6 +2,18 @@
 
 All notable changes to `:package_name` will be documented in this file.
 
+## v3.0.2 - 2025-12-30
+
+### What's Changed
+
+* handle empty table by @ht3aa in https://github.com/ht3aa/status-tabs/pull/3
+
+### New Contributors
+
+* @ht3aa made their first contribution in https://github.com/ht3aa/status-tabs/pull/3
+
+**Full Changelog**: https://github.com/ht3aa/status-tabs/compare/v3.0.1...v3.0.2
+
 ## v3.0.1 - 2025-12-30
 
 **Full Changelog**: https://github.com/ht3aa/status-tabs/compare/v3.0.0...v3.0.1
