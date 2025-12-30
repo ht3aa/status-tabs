@@ -16,7 +16,7 @@ class StatusTabs extends ListRecords
         // get status column from the model
         $statusEnumClass = $this->getModel()::select('status')->first()?->getCasts('status')['status'];
 
-        if (!$statusEnumClass) {
+        if (! $statusEnumClass) {
             return [];
         }
 
