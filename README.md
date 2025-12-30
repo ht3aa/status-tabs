@@ -7,7 +7,7 @@
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via composer (only support filament v3):
 
 ```bash
 composer require ht3aa/status-tabs
