@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class StatusTabs extends ListRecords
 {
-
     public function getTabs(): array
     {
         $tabs = [
@@ -16,7 +15,6 @@ class StatusTabs extends ListRecords
         ];
         // get status column from the model
         $statusEnumClass = $this->getModel()::select('status')->first()->getCasts('status')['status'];
-
 
         foreach ($statusEnumClass::cases() as $status) {
             $tabs[$status->value] = Tab::make($status->getLabel())
